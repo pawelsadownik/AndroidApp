@@ -1,20 +1,22 @@
-package com.example.bmicalc;
+package com.example.bmicalc.game;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 
-import static com.example.bmicalc.GameView.screenRatioX;
-import static com.example.bmicalc.GameView.screenRatioY;
+import com.example.bmicalc.R;
+
+import static com.example.bmicalc.game.GameView.screenRatioX;
+import static com.example.bmicalc.game.GameView.screenRatioY;
 
 
-public class Bullet {
+public class Vaccine {
 
     int x, y, width, height;
     Bitmap bullet;
 
-    Bullet (Resources res) {
+    Vaccine(Resources res) {
 
         bullet = BitmapFactory.decodeResource(res, R.drawable.vaccine);
 

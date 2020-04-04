@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import com.example.bmicalc.bmi.HomeActivity;
+import com.example.bmicalc.chart.ChartActivity;
+import com.example.bmicalc.game.StartGameActivity;
 
 public class NavActivity extends AppCompatActivity {
 

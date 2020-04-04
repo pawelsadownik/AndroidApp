@@ -9,17 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GameActivity"
+        <activity android:name=".game.GameActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar"/>
         <activity
-            android:name=".StartGameActivity"
+            android:name=".game.StartGameActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar"></activity>
         <activity android:name=".NavActivity" />
-        <activity android:name=".ChartActivity" />
-        <activity android:name=".ResultActivity" />
-        <activity android:name=".HomeActivity" />
+        <activity android:name=".chart.ChartActivity" />
+        <activity android:name=".bmi.ResultActivity" />
+        <activity android:name=".bmi.HomeActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">

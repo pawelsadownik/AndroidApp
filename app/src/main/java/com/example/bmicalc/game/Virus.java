@@ -1,22 +1,24 @@
-package com.example.bmicalc;
+package com.example.bmicalc.game;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 
-import static com.example.bmicalc.GameView.screenRatioX;
-import static com.example.bmicalc.GameView.screenRatioY;
+import com.example.bmicalc.R;
+
+import static com.example.bmicalc.game.GameView.screenRatioX;
+import static com.example.bmicalc.game.GameView.screenRatioY;
 
 
-public class Bird {
+public class Virus {
 
     public int speed = 20;
     public boolean wasShot = true;
     int x = 0, y, width, height, birdCounter = 1;
     Bitmap bird1, bird2, bird3, bird4;
 
-    Bird (Resources res) {
+    Virus(Resources res) {
 
         bird1 = BitmapFactory.decodeResource(res, R.drawable.virus);
         bird2 = BitmapFactory.decodeResource(res, R.drawable.virus);

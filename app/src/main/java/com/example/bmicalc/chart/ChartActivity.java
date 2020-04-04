@@ -1,4 +1,4 @@
-package com.example.bmicalc;
+package com.example.bmicalc.chart;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,9 +12,8 @@ import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Pie;
-import com.anychart.core.Chart;
-import com.anychart.core.ui.Title;
-
+import com.example.bmicalc.NavActivity;
+import com.example.bmicalc.R;
 import java.util.ArrayList;
 import java.util.List;
 

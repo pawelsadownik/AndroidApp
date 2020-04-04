@@ -1,4 +1,4 @@
-package com.example.bmicalc;
+package com.example.bmicalc.bmi;
 
 public class Result {
 

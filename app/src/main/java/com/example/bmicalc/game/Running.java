@@ -1,15 +1,17 @@
-package com.example.bmicalc;
+package com.example.bmicalc.game;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 
-import static com.example.bmicalc.GameView.screenRatioX;
-import static com.example.bmicalc.GameView.screenRatioY;
+import com.example.bmicalc.R;
+
+import static com.example.bmicalc.game.GameView.screenRatioX;
+import static com.example.bmicalc.game.GameView.screenRatioY;
 
 
-public class Flight {
+public class Running {
 
     int toShoot = 0;
     boolean isGoingUp = false;
@@ -17,7 +19,7 @@ public class Flight {
     Bitmap flight1, flight2, shoot1, shoot2, shoot3, shoot4, shoot5, dead;
     private GameView gameView;
 
-    Flight (GameView gameView, int screenY, Resources res) {
+    Running(GameView gameView, int screenY, Resources res) {
 
         this.gameView = gameView;
 

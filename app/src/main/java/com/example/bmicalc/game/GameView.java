@@ -1,4 +1,4 @@
-package com.example.bmicalc;
+package com.example.bmicalc.game;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import android.media.SoundPool;
 import android.os.Build;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
-
+import com.example.bmicalc.R;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -25,13 +25,13 @@ public class GameView extends SurfaceView implements Runnable {
     private int screenX, screenY, score = 0;
     public static float screenRatioX, screenRatioY;
     private Paint paint;
-    private Bird[] birds;
+    private Virus[] viruses;
     private SharedPreferences prefs;
     private Random random;
     private SoundPool soundPool;
-    private List<Bullet> bullets;
+    private List<Vaccine> vaccines;
     private int sound;
-    private Flight flight;
+    private Running running;
     private GameActivity activity;
     private Background background1, background2;
 
@@ -67,9 +67,9 @@ public class GameView extends SurfaceView implements Runnable {
         background1 = new Background(screenX, screenY, getResources());
         background2 = new Background(screenX, screenY, getResources());
 
-        flight = new Flight(this, screenY, getResources());
+        running = new Running(this, screenY, getResources());
 
-        bullets = new ArrayList<>();
+        vaccines = new ArrayList<>();
 
         background2.x = screenX;
 
@@ -77,12 +77,12 @@ public class GameView extends SurfaceView implements Runnable {
         paint.setTextSize(128);
         paint.setColor(Color.WHITE);
 
-        birds = new Bird[4];
+        viruses = new Virus[4];
 
         for (int i = 0;i < 4;i++) {
 
-            Bird bird = new Bird(getResources());
-            birds[i] = bird;
+            Virus virus = new Virus(getResources());
+            viruses[i] = virus;
 
         }
 
@@ -116,35 +116,35 @@ public class GameView extends SurfaceView implements Runnable {
             background2.x = screenX;
         }
 
-        if (flight.isGoingUp)
-            flight.y -= 30 * screenRatioY;
+        if (running.isGoingUp)
+            running.y -= 30 * screenRatioY;
         else
-            flight.y += 30 * screenRatioY;
+            running.y += 30 * screenRatioY;
 
-        if (flight.y < 0)
-            flight.y = 0;
+        if (running.y < 0)
+            running.y = 0;
 
-        if (flight.y >= screenY - flight.height)
-            flight.y = screenY - flight.height;
+        if (running.y >= screenY - running.height)
+            running.y = screenY - running.height;
 
-        List<Bullet> trash = new ArrayList<>();
+        List<Vaccine> trash = new ArrayList<>();
 
-        for (Bullet bullet : bullets) {
+        for (Vaccine vaccine : vaccines) {
 
-            if (bullet.x > screenX)
-                trash.add(bullet);
+            if (vaccine.x > screenX)
+                trash.add(vaccine);
 
-            bullet.x += 50 * screenRatioX;
+            vaccine.x += 50 * screenRatioX;
 
-            for (Bird bird : birds) {
+            for (Virus virus : viruses) {
 
-                if (Rect.intersects(bird.getCollisionShape(),
-                        bullet.getCollisionShape())) {
+                if (Rect.intersects(virus.getCollisionShape(),
+                        vaccine.getCollisionShape())) {
 
                     score++;
-                    bird.x = -500;
-                    bullet.x = screenX + 500;
-                    bird.wasShot = true;
+                    virus.x = -500;
+                    vaccine.x = screenX + 500;
+                    virus.wasShot = true;
 
                 }
 
@@ -152,33 +152,33 @@ public class GameView extends SurfaceView implements Runnable {
 
         }
 
-        for (Bullet bullet : trash)
-            bullets.remove(bullet);
+        for (Vaccine vaccine : trash)
+            vaccines.remove(vaccine);
 
-        for (Bird bird : birds) {
+        for (Virus virus : viruses) {
 
-            bird.x -= bird.speed;
+            virus.x -= virus.speed;
 
-            if (bird.x + bird.width < 0) {
+            if (virus.x + virus.width < 0) {
 
-                if (!bird.wasShot) {
+                if (!virus.wasShot) {
                     isGameOver = true;
                     return;
                 }
 
                 int bound = (int) (30 * screenRatioX);
-                bird.speed = random.nextInt(bound);
+                virus.speed = random.nextInt(bound);
 
-                if (bird.speed < 10 * screenRatioX)
-                    bird.speed = (int) (10 * screenRatioX);
+                if (virus.speed < 10 * screenRatioX)
+                    virus.speed = (int) (10 * screenRatioX);
 
-                bird.x = screenX;
-                bird.y = random.nextInt(screenY - bird.height);
+                virus.x = screenX;
+                virus.y = random.nextInt(screenY - virus.height);
 
-                bird.wasShot = false;
+                virus.wasShot = false;
             }
 
-            if (Rect.intersects(bird.getCollisionShape(), flight.getCollisionShape())) {
+            if (Rect.intersects(virus.getCollisionShape(), running.getCollisionShape())) {
 
                 isGameOver = true;
                 return;
@@ -196,24 +196,24 @@ public class GameView extends SurfaceView implements Runnable {
             canvas.drawBitmap(background1.background, background1.x, background1.y, paint);
             canvas.drawBitmap(background2.background, background2.x, background2.y, paint);
 
-            for (Bird bird : birds)
-                canvas.drawBitmap(bird.getBird(), bird.x, bird.y, paint);
+            for (Virus virus : viruses)
+                canvas.drawBitmap(virus.getBird(), virus.x, virus.y, paint);
 
             canvas.drawText(score + "", screenX / 2f, 164, paint);
 
             if (isGameOver) {
                 isPlaying = false;
-                canvas.drawBitmap(flight.getDead(), flight.x, flight.y, paint);
+                canvas.drawBitmap(running.getDead(), running.x, running.y, paint);
                 getHolder().unlockCanvasAndPost(canvas);
                 saveIfHighScore();
                 waitBeforeExiting ();
                 return;
             }
 
-            canvas.drawBitmap(flight.getFlight(), flight.x, flight.y, paint);
+            canvas.drawBitmap(running.getFlight(), running.x, running.y, paint);
 
-            for (Bullet bullet : bullets)
-                canvas.drawBitmap(bullet.bullet, bullet.x, bullet.y, paint);
+            for (Vaccine vaccine : vaccines)
+                canvas.drawBitmap(vaccine.bullet, vaccine.x, vaccine.y, paint);
 
             getHolder().unlockCanvasAndPost(canvas);
 
@@ -276,13 +276,13 @@ public class GameView extends SurfaceView implements Runnable {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 if (event.getX() < screenX / 2) {
-                    flight.isGoingUp = true;
+                    running.isGoingUp = true;
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                flight.isGoingUp = false;
+                running.isGoingUp = false;
                 if (event.getX() > screenX / 2)
-                    flight.toShoot++;
+                    running.toShoot++;
                 break;
         }
 
@@ -294,10 +294,10 @@ public class GameView extends SurfaceView implements Runnable {
         if (!prefs.getBoolean("isMute", false))
             soundPool.play(sound, 1, 1, 0, 0, 1);
 
-        Bullet bullet = new Bullet(getResources());
-        bullet.x = flight.x + flight.width;
-        bullet.y = flight.y + (flight.height / 2);
-        bullets.add(bullet);
+        Vaccine vaccine = new Vaccine(getResources());
+        vaccine.x = running.x + running.width;
+        vaccine.y = running.y + (running.height / 2);
+        vaccines.add(vaccine);
 
     }
 }

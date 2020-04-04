@@ -1,7 +1,6 @@
-package com.example.bmicalc;
+package com.example.bmicalc.game;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.WindowManager;

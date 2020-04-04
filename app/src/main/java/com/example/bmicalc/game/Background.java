@@ -1,8 +1,9 @@
-package com.example.bmicalc;
+package com.example.bmicalc.game;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import com.example.bmicalc.R;
 
 public class Background {
 
