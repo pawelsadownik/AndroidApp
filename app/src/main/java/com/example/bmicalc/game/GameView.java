@@ -57,7 +57,7 @@ public class GameView extends SurfaceView implements Runnable {
         } else
             soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
 
-        sound = soundPool.load(activity, R.raw.shoot, 1);
+        sound = soundPool.load(activity, R.raw.shot, 1);
 
         this.screenX = screenX;
         this.screenY = screenY;
