@@ -16,7 +16,7 @@
             android:name=".game.StartGameActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar"></activity>
-        <activity android:name=".NavActivity" />
+        <activity android:name=".NavActivity"/>
         <activity android:name=".chart.ChartActivity" />
         <activity android:name=".bmi.ResultActivity" />
         <activity android:name=".bmi.HomeActivity" />
