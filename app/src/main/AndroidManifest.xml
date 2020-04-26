@@ -18,8 +18,8 @@
             android:theme="@style/AppTheme.noActionBar"></activity>
         <activity android:name=".NavActivity"/>
         <activity android:name=".chart.ChartActivity" />
-        <activity android:name=".bmi.ResultActivity" />
         <activity android:name=".bmi.HomeActivity" />
+        <activity android:name=".bmi.ResultActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
