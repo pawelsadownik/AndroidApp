@@ -10,18 +10,6 @@ import com.example.bmicalc.R
 
 class ResultActivity : AppCompatActivity() {
 
-    private var resultBmi: TextView? = null
-    private var resultKcal: TextView? = null
-    private var resultDescription: TextView? = null
-    private var rice: TextView? = null
-    private var riceAmount: TextView? = null
-    private var chicken: TextView? = null
-    private var chickenAmount: TextView? = null
-    private var vegetables: TextView? = null
-    private var vegetablesAmount: TextView? = null
-    private var dessert: TextView? = null
-    private var dessertAmount: TextView? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -32,29 +20,14 @@ class ResultActivity : AppCompatActivity() {
         val description = intent.getStringExtra("description")
         val amount = intent.getStringExtra("amount")
 
-        resultBmi = findViewById(R.id.resultBmi) as TextView
-        resultKcal = findViewById(R.id.resultKcal) as TextView
-        resultDescription = findViewById(R.id.resultDescription) as TextView
-        rice = findViewById(R.id.rice) as TextView
-        riceAmount = findViewById(R.id.riceAmount) as TextView
-        chicken = findViewById(R.id.chicken) as TextView
-        chickenAmount = findViewById(R.id.chickenAmount) as TextView
-        vegetables = findViewById(R.id.vegetables) as TextView
-        vegetablesAmount = findViewById(R.id.vegetablesAmount) as TextView
-        dessert = findViewById(R.id.dessert) as TextView
-        dessertAmount = findViewById(R.id.dessertAmount) as TextView
-
-        resultKcal!!.setText(kcal.toString())
-        resultBmi!!.setText(bmi.toString())
-        resultDescription!!.setText(description)
+        findViewById<TextView>(R.id.resultKcal).setText(kcal.toString())
+        findViewById<TextView>(R.id.resultBmi).setText(bmi.toString())
+        findViewById<TextView>(R.id.resultDescription).setText(description)
 
         setVisibility(false)
 
         val buttonApply = findViewById<Button>(R.id.recipes)
         buttonApply.setOnClickListener(View.OnClickListener {
-            resultBmi!!.text = bmi
-            resultKcal!!.setText(kcal)
-            resultDescription!!.setText(description)
             setRecipe(amount)
             setVisibility(true)
         })
@@ -67,27 +40,27 @@ class ResultActivity : AppCompatActivity() {
         })
     }
 
-    fun setVisibility(isVisible: Boolean) {
+    private fun setVisibility(isVisible: Boolean) {
         var visible = View.INVISIBLE
 
         if (isVisible) {
             visible = View.VISIBLE
         }
 
-        rice!!.setVisibility(visible)
-        riceAmount!!.setVisibility(visible)
-        chicken!!.setVisibility(visible)
-        chickenAmount!!.setVisibility(visible)
-        vegetables!!.setVisibility(visible)
-        riceAmount!!.setVisibility(visible)
-        vegetablesAmount!!.setVisibility(visible)
-        dessert!!.setVisibility(visible)
-        dessertAmount!!.setVisibility(visible)
+        findViewById<TextView>(R.id.rice).visibility = visible
+        findViewById<TextView>(R.id.riceAmount).visibility = visible
+        findViewById<TextView>(R.id.chicken).visibility = visible
+        findViewById<TextView>(R.id.chickenAmount).visibility = visible
+        findViewById<TextView>(R.id.vegetables).visibility = visible
+        findViewById<TextView>(R.id.vegetablesAmount).visibility = visible
+        findViewById<TextView>(R.id.dessert).visibility = visible
+        findViewById<TextView>(R.id.dessertAmount).visibility = visible
+
     }
 
-    fun setRecipe(amount: String) {
+    private fun setRecipe(amount: String) {
 
-        riceAmount!!.setText(amount)
-        chickenAmount!!.setText((Integer.parseInt(amount) * 2).toString())
+        findViewById<TextView>(R.id.riceAmount).text =  amount
+        findViewById<TextView>(R.id.chickenAmount).text = (Integer.parseInt(amount) * 2).toString()
     }
 }
